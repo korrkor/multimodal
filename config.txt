@@ -1,0 +1,1 @@
+[{"name": "korkor", "sender_email": "korkorkoteyafutu@gmail.com", "password": "62131121", "smtp_server": "smtp.gmail.com", "port": 587, "receiver_email": "korkor.kafutu@gmail.com"}, {"name": "kweiks", "sender_email": "korkorkoteyafutu@gmail.com", "password": "62131121", "smtp_server": "smtp.gmail.com", "port": 587, "receiver_email": "korkor.kafutu@gmail.com"}]
