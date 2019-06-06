@@ -30,8 +30,12 @@ class DbUtils:
 
     def commit_to_db(self):
         cursor, connection = self.db_connection()
-        cursor.execute("INSERT INTO recogniser_details (`name`, `identifier_blob`) VALUES (%s,%s)")
-        insert_tuple = ( self.name,self.blob)
+        sql_query = "INSERT INTO recogniser_details (`name`, `identifier_blob`) VALUES (%s,%s)"
+        # print()
+        insert_tuple = (self.name,self.blob)
+        cursor.execute(sql_query, insert_tuple)
+        print("INSERT INTO recogniser_details (`name`, `identifier_blob`) VALUES (%s,%s)")
+
         connection.commit()
         return True
         

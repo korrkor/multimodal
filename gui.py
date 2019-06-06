@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from Profile import Profile
 from tkinter import messagebox
+from facial_recognition_training.Capture import Capture
 
 logged_in = ""
 def login():
@@ -17,8 +18,11 @@ def login():
     messagebox.showerror("Authentication Failed!", "Login Failed. Try again")
     clear_text([name, pin])
 
+def activate_train_screen():
+  show_tab(3)
+
 def activate_profile_screen(event): 
-  tabControl.select(2)
+  show_tab(2)
   
 def create_profile():
   profile = Profile(pname.get(), pemail.get(), ppin.get())
@@ -47,6 +51,10 @@ def activate_monitor():
   else:
     messagebox.showerror("Oops", "Something went wrong. Contact the support center")
 
+def start_training():
+  capture = Capture(blob.get())
+  messagebox.showinfo("Success", blob.get() , " added successfully")
+  show_tab(1)
 # ****************************************gui start******************************
 win = tk.Tk()                           
 win.title("Python GUI") 
@@ -57,10 +65,12 @@ tab_intro = ttk.Frame(tabControl)
 tab_intro.grid(column=5, row=3)         
 tab_home= ttk.Frame(tabControl) 
 tab_create_profile = ttk.Frame(tabControl) 
+tab_train_faces = ttk.Frame(tabControl)
  
 tabControl.add(tab_intro, text='Getting Started') 
 tabControl.add(tab_home, state="hidden",text='Home')  
 tabControl.add(tab_create_profile, state="hidden",text='Add new profile')  
+tabControl.add(tab_train_faces, state="hidden", text="Train new faces")
 
 lbl = tk.Label(tab_intro, text="Welcome to the app.", padx =20,pady=20,font=("Gudea", 15), anchor="w",justify="left")
 lbl.pack()
@@ -92,7 +102,7 @@ lblName.pack()
 buttonAcivate = tk.Button(tab_home,text="Activate Monitor",font=("Gudea", 12), anchor="e",command=activate_monitor)
 buttonAcivate.pack()
 
-buttonTrain = tk.Button(tab_home,text="Add new face",font=("Gudea", 12), anchor="e",command=login)
+buttonTrain = tk.Button(tab_home,text="Add new face",font=("Gudea", 12), anchor="e",command=activate_train_screen)
 buttonTrain.pack()
 
 #******************* end homepage *************
@@ -116,10 +126,6 @@ pemail = tk.Entry(tab_create_profile)
 pemaillbl.pack()
 pemail.pack()
 
-# ppasswordlbl = tk.Label(tab_create_profile, text = "Email password", font=("Gudea", 10),anchor="w", wraplength = 550)
-# ppassword = tk.Entry(tab_create_profile)
-# ppasswordlbl.pack()
-# ppassword.pack()
 
 ppinlbl = tk.Label(tab_create_profile, text = "Pin", font=("Gudea", 10),anchor="w", wraplength = 550)
 ppin = tk.Entry(tab_create_profile)
@@ -134,7 +140,17 @@ buttonCreateProfile.pack()
 #**************************** ENd new user creation **************************************************
 
 ## ********************************* train face form *********************************************************
+lbltrain = tk.Label(tab_train_faces, text="On this screen, you are able to add new faces to the database to improve the accuracy of the facial recognition ",  wraplength = 350,padx =20,pady=20,font=("Gudea", 12), anchor="w",justify="left")
+lbltrain.pack()
 
+lblblob = tk.Label(tab_train_faces, text="Name", font=("Gudea", 10),anchor="w", wraplength = 550)
+lblblob.pack()
+
+blob = tk.Entry(tab_train_faces)
+blob.pack()
+
+buttonStartTraining = tk.Button(tab_train_faces,text="Train the recogniser",font=("Gudea", 10), anchor="e",command=start_training) 
+buttonStartTraining.pack()
 #  ********************************* end train face form *********************************************************
 
 
