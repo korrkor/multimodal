@@ -1,7 +1,8 @@
 import numpy as np
 import cv2
-from facial_recognition_training.DbUtils import DbUtils
-
+# from facial_recognition_training.DbUtils import DbUtils
+# from facial_recognition_training.trainner import Trainer
+import trainner
 class Capture:
     
     def __init__(self, name = ""):
@@ -44,7 +45,11 @@ class Capture:
                 utils.commit_to_db()
                 break
         cap.release()
-        cv2.destroyAllWindows()    
-    
-# capture = Capture()
+        cv2.destroyAllWindows()   
+        # trainer = Trainer()
+        # trainer.getImagesAndLabels(self.path+"dataSet/") 
+
+trainer = Trainer()
+path = "facial_recognition_training/"
+trainer.getImagesAndLabels(path+"dataSet/") 
 

@@ -10,6 +10,7 @@ class Trainer:
     
     def getImagesAndLabels(path):
         #get the path of all the files in the folder
+        print("this is the path ", path)
         imagePaths=[os.path.join(path,f) for f in os.listdir(path)] 
         #create empth face list
         faceSamples=[]
